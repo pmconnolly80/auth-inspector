@@ -64,7 +64,7 @@
           <td><button call-method="getCurrentUser"></button></td>
           <td>
             <ul providers-remarks="getCurrentUser"></ul>
-            <p>Most APIs/SDKs have a method to check if the current user is already authenticated. Execute this code in the <code>run()</code> phase of your application to find out if the user is still logged in from a previous session:<pre>.run(['authService', function(authService) {
+            <p>Most APIs/SDKs have a method to check if the current user is already authenticated. Execute this code in the <code>run()</code> phase of your AngularJS application to find out if the user is still logged in from a previous session:<pre>.run(['authService', function(authService) {
   authService.getCurrentUser();
 }])</pre></p>
             <p>If the user is still authenticated (and authorized), your app's UI should reflect it (e.g. by hiding the "Login" button).</p>

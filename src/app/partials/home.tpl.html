@@ -2,30 +2,33 @@
   <p class="text-center"><img src="assets/auth-inspector-logo.png" alt="AngularJS Auth Inspector logo" width="400" height="254"/></p>
 
   <p class="lead">Use this online tool to understand how <strong>pure JavaScript authentication</strong> works in <a href="http://en.wikipedia.org/wiki/Single-page_application">SPAs</a> and more specifically in <a href="https://angularjs.org/">AngularJS</a>.<p>
-
-  <h3>Quick Start</h3>
-  <ul>
-    <li>Select an authentication provider such as Google, Facebook... in the dropdown list at the top of the screen.</li>
-    <li>Click the buttons to call methods like <code>login()</code>, <code>logout()</code>, etc. for the provider you've selected and inspect the results directly in the page. Note that I have used generic method names to wrap provider-specific code. The inspector will tell you which methods were actually called in the provider's API/SDK to perform login, logout, etc.</li>
-    <li>Grab the <a href="https://github.com/ngworkshop/auth-inspector">code on Github</a> to reuse it in your own applications! More specifically, you might want to look in the <a href="#">auth_providers</a> folder to see how authentication was implemented for a specific provider that you're interested in.</li>
-  </ul>
-
-  <h3>Installation</h3>
-  <p>Follow these instructions to install Auth Inspector locally:</p>
-  <ul>
-    <li>Check out the Github repository <code>https://github.com/ngworkshop/auth-inspector</code>.</li>
-    <li>Grab an API Key/Client ID/etc. for the provider(s) you're interested in and copy it in <code>config.js</code>. Visit the provider's page on this site for more specific instructions.</li>
-    <li>Depending on the provider, you might need to whilelist the URLs where your code is going to run. For example, if you're developing on <code>http://localhost</code> and you're using Facebook as your auth provider, you need to create a Facebook App and enter the <code>http://localhost</code> in that app. Again, visit the provider's page on this site for more specific instructions.</li>
-      Grab an API Key/Client ID/etc. for the provider(s) you're interested in and copy it in <code>config.js</code>. Select the provider you're interested in in the dropdown list for more specific instructions.</li>
-    <li>There is no fancy build system or node.js server. The repository contains the entire code required to run the application. You will need a server to serve the static files located in the <code>src</code> folder. If you have a server like Apache installed locally, you could just copy the repository there and browse to the folder. Or you could execute these commands from the prompt:
-    <pre>> cd LOCAL_REPO/src
-> python -m SimpleHTTPServer 4567</pre></li>
-  </ul>
-
-  <h3>Why this tool?</h3>
-  <p>Because I — <a href="http://vincecarre.com/">Vince Carré</a> — was struggling to wrap my head around authentication in SPAs. There are lots of pieces involved (securing your endpoints, securing the routes of your application...), a lot of techniques (cookies, JSON Web Tokens...) and a lot of authentication providers (google, facebook, auth0...). Hopefully this tool clears up some of the confusion.</p>
-
-
-  <h3>Looking for quality AngularJS training?</h3>
-  <p>Please visit <a href="http://ng-workshop.com/">http://ng-workshop.com/</a>.</p>
 </div>
+
+<h3>Quick Start</h3>
+<p>AngularJS Auth Inspector is an online tool that you can start using immediately:</p>
+<ul>
+  <li>Select an authentication provider such as Google, Facebook... in the dropdown list at the top of the screen.</li>
+  <li>Click the buttons to call methods like <code>login()</code>, <code>logout()</code>, etc. for the provider you've selected and inspect the results directly in the page. Note that I have used generic method names to wrap provider-specific code. The inspector will tell you which methods were actually called in the provider's API/SDK to perform login, logout, etc.</li>
+  <li>Grab the <a href="https://github.com/ngworkshop/auth-inspector">code on Github</a> to reuse it in your own applications! More specifically, you might want to look in the <a href="https://github.com/ngworkshop/auth-inspector/tree/gh-pages/src/app/auth_providers">auth_providers</a> folder to see how authentication was implemented for a specific provider that you're interested in.</li>
+</ul>
+
+<h3>Local Installation</h3>
+<p>Follow these instructions to install Auth Inspector locally:</p>
+<ul>
+  <li>Check out the Github repository: <code>git clone https://github.com/ngworkshop/auth-inspector.git</code> (or <a href="https://github.com/ngworkshop/auth-inspector/archive/gh-pages.zip">download it</a> from Github).</li>
+  <li>Grab an API Key/Client ID/etc. for the provider(s) you're interested in and copy it in <code>src/app/config.js</code>. Visit the provider's page on here for more specific instructions.</li>
+  <li>Depending on the provider, you might need to whilelist the URLs where your code is going to run. For example, if you're developing on <code>http://localhost</code> and you're using Facebook as your auth provider, you need to create a Facebook App and enter the <code>http://localhost</code> URL in that app. Again, visit the provider's page on here for more specific instructions.</li>
+  <li>There is no fancy build system or node.js server included in the Github repository. Instead, it already contains the entire code (including vendor libraries) required to run the application. But you will need a server to serve the static files located in the <code>src</code> folder. If you have a server like Apache installed locally, you could just copy the repository there and browse to the <code>src</code> folder. Or you could execute these commands from the prompt:</li>
+</ul>
+
+<pre>> cd PATH/TO/REPO/src
+> python -m SimpleHTTPServer 4567
+
+# Now you can visit http://localhost:4567 to view the auth inspector</pre>
+
+<h3>Why This Tool?</h3>
+<p>Because I — <a href="http://vincecarre.com/">Vince Carré</a> — was struggling to wrap my head around authentication in SPAs. There are lots of pieces involved (securing your endpoints, securing the routes of your application...), a lot of techniques (cookies, JSON Web Tokens...) and a lot of authentication providers (google, facebook, auth0...). Hopefully this tool clears up some of the confusion.</p>
+
+
+<h3>Looking for quality AngularJS training?</h3>
+<p>Please visit <a href="http://ng-workshop.com/">http://ng-workshop.com/</a>.</p>

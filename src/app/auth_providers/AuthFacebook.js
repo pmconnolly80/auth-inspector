@@ -39,9 +39,11 @@
         intro: {
           whenToUse: ['To let your users authenticate with their Facebook account.',
             'To let your users access and modify their private data on Facebook.'],
-          requirements: ['Create an <strong>app</strong> on <a href="https://developers.facebook.com/apps/">Facebook App Dashboard</a> and make note of its <strong>App ID</strong>.',
-            'The Facebook JavaScript SDK uses a <code>scope</code> parameter with the <code>FB.login</code> function call to define the level of access that your application needs. For example, the <code>email</code> scope provides access to the person\'s primary email address on Facebook. The default scope is <code>' + FB_SCOPE_PUBLIC_PROFILE + '</code>. Make sure that you log in your users with the proper scope for what you\'re trying to accomplish. See <a href="https://developers.facebook.com/docs/facebook-login/permissions">Facebook documentation on Permissions</a>.'],
-          inYourCode: ['Include the <a href="https://developers.facebook.com/docs/javascript">Facebook JavaScript SDK</a> to authenticate your users with their Facebook account.']
+          requirements: ['Go to <a href="https://developers.facebook.com/apps/">Facebook App Dashboard</a> and create an <strong>App</strong>; make note of its <strong>App ID</strong>.',
+            'In your Facebook app settings, click <strong>Add Platform &gt; Website</strong> and enter the URL of the the website where your code will be hosted. Also enter in the same URL in </strong>Settings &gt; Advanced &gt; Valid OAuth redirect URIs</strong>. For the online version of the Auth Inspector, I have entered <code>http://ngworkshop.github.io/</code>.'],
+          inYourCode: ['Include the <a href="https://developers.facebook.com/docs/javascript">Facebook JavaScript SDK</a> that will help you authenticate your users and make requests to the Facebook API.',
+            'If you\'re installing Auth Inspector locally, copy your Facebook App ID in <code>src/app/config.js</code> (<code>FB_APP_ID</code> constant).',
+            'The Facebook JavaScript SDK uses a <code>scope</code> parameter with the <code>FB.login</code> function to define the level of access that your application needs. Make sure that you specify the proper scope for what you\'re trying to accomplish. For example, the <code>email</code> scope provides access to the person\'s primary email address on Facebook. The default scope is <code>' + FB_SCOPE_PUBLIC_PROFILE + '</code> and provides access to basic Facebook profile information. See <a href="https://developers.facebook.com/docs/facebook-login/permissions">Facebook documentation on Permissions</a>.']
         },
         remarks: {
           init: ['Initializes Facebook JavaScript SDK:<br/><code>FB.init(...);</code>'],
@@ -155,7 +157,7 @@
        * Helper function to process a response from the Facebook API.
        *
        * The Facebook API always sends only one response object, but the object contents
-       * change depending on whether the request was successful or not.
+       * vary depending on whether the request was successful or not.
        */
       function handleResponse(response, resultKey) {
         if (!response || response.error) {
