@@ -61,7 +61,6 @@
        *   A promise that will be resolved if & when the provider's dependencies are satisfied.
        */
       function activate(name) {
-        console.log('activating...', name);
         var provider,       // Instantiated service representing the provider being activated
             providerMeta,   // Metadata about the provider being activated
             providerInfo,   // Info about the provider being activated (dependencies...)
@@ -121,7 +120,6 @@
         var deferred = $q.defer();
         $q.all([dependenciesLoaded, dependenciesInitialized, constantsDefined])
           .then(function() {  // This function receives the resolve values of the aggregated promises
-            console.log('promises resolved');
             activeProvider = provider;
             activeProviderName = name;
             providers[name].activatedBefore = true;
