@@ -78,7 +78,7 @@
           <td><button call-method="loginOAuth"></button></td>
           <td>
             <ul providers-remarks="loginOAuth"></ul>
-            <p>The authorization sequence begins by redirecting the browser (full page or popup) to a URL at the auth provider, which then handles user authentication and user consent.</p>
+            <p>The OAuth authorization sequence begins by redirecting the browser (full page or popup) to a URL at the auth provider, which then handles user authentication and user consent.</p>
             <p>The result (if successful) is an access token that should be included with every subsequent API request in the following header:<br/><code>authorization: Bearer &lt;YOUR_ACCESS_TOKEN&gt;</code>
             <div class="alert alert-info"><p>JS client libraries handle this for you automatically.</p></div>
             <p>NB. If nothing happens when you click the button, it is most likely because you're already authenticated with <strong>{{providerInfo.name}}</strong>.</p>

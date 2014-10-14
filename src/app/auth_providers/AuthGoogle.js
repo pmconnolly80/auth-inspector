@@ -37,9 +37,10 @@
         intro: {
           whenToUse: ['To let your users authenticate with their Gmail account.',
             'To let your users access and modify their private data in a Google app (e.g. their Google docs, their Google contacts...).'],
-          requirements: ['Create a <strong>project</strong> in <a href="https://console.developers.google.com">Google Developers Console</a>, THEN...',
+          requirements: ['Create a <strong>Project</strong> in <a href="https://console.developers.google.com">Google Developers Console</a>, THEN...',
             '... if you don\'t need to access private user data, create an <strong>API Key</strong>.',
-            '... if you DO need to access private user data, create an <strong>OAuth 2.0 client ID</strong>.'],
+            '... if you DO need to access private user data, create an <strong>OAuth 2.0 client ID</strong>.',
+            '<strong>Enable the Google APIs</strong> that your app will use: go to Google Developers Console &gt; Your Project &gt; APIs & auth &gt; APIs &gt; enable the desired APIs.'],
           inYourCode: ['Include the <a href="https://developers.google.com/api-client-library/javascript/">Google JavaScript client library</a> that will help you authenticate your users with their Google account and make requests to various Google APIs.',
             'If you\'re installing Auth Inspector locally, copy the OAuth Client ID of your project in <code>src/app/config.js</code> (<code>GAPI_CLIENT_ID</code> constant).',
             '<strong>Scopes.</strong> Google APIs require that you use a <code>scope</code> parameter during your access-token request to define the level of access to a particular API that your application needs. For example, the following scope lets your application access the Google+ profile of the currently logged-in user: <code>https://www.googleapis.com/auth/plus.me</code>. This one lets your application read all resources and their metadata in the Gmail account of the currently logged-in user but forbids all write operations: <code>https://www.googleapis.com/auth/gmail.readonly</code>. And so on.<br/>Google recommends that you <strong>request scopes incrementally</strong>, at the time access is required, rather than up front. For example, an app that wants to support purchases should not request Google Wallet access until the user presses the "Buy" button.',
@@ -72,7 +73,7 @@
         getCurrentUser: function() {
           // Authorize using "immediate mode", which means that the token is refreshed
           // behind the scenes, and no UI is shown to the user.
-          // Alt method: gapi.auth.checkSessionState() but it requires to pass the client_id and the session_state.
+          // Alt method: gapi.auth.checkSessionState({client_id: GAPI_CLIENT_ID, session_state: null})
           gapi.auth.authorize({client_id: GAPI_CLIENT_ID, scope: GAPI_CLIENT_SCOPE_BASIC_PROFILE, immediate: true}, handleAuthResult);
           // Authentication callback (called whether auth succeeded or failed).
           function handleAuthResult(authResult) {
