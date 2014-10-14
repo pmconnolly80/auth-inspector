@@ -1,0 +1,237 @@
+<!-- Auth Provider Presentation -->
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{providerInfo.name}}</h3>
+  </div>
+  <div class="panel-body">
+    <h5>When To Use</h5>
+    <ul><li ng-repeat="whenToUse in providerInfo.intro.whenToUse" ng-bind-html="whenToUse"></li></ul>
+
+    <h5>Requirements</h5>
+    <ul><li ng-repeat="requirement in providerInfo.intro.requirements" ng-bind-html="requirement"></li></ul>
+
+    <h5>In Your Code</h5>
+    <ul><li ng-repeat="inYourCode in providerInfo.intro.inYourCode" ng-bind-html="inYourCode"></li></ul>
+  </div>
+</div>
+
+<!-- Authentication -->
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Authentication</h3>
+  </div>
+  <div class="panel-body">
+
+    <table class="table table-condensed">
+
+      <thead>
+        <tr>
+          <th class="col-md-2">Method</th>
+          <th class="col-md-4">What the code does</th>
+          <th class="col-md-6">Results</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td class="col-md-2"><code>init()</code></td>
+          <td class="col-md-4">
+            <ul providers-remarks="init"></ul>
+            <p>This method sets up everything (e.g. sets Client IDs...) so that SDKs are ready to use. Additionally, it could check if the user is already authenticated. This method should execute automatically before your users try authenticating.</p>
+          </td>
+          <td class="col-md-6">
+            ---
+          </td>
+        </tr>
+
+        <tr ng-class="getClassForResult('monitorState')">
+          <td>
+            <p><button call-method="startMonitoring" result-key="monitorState"></button></p>
+            <p><button call-method="stopMonitoring" result-key="monitorState"></button></p>
+          </td>
+          <td>
+            <ul providers-remarks="monitorState"></ul>
+            <p>These methods start/stop listening for changes in user authentication state <strong>provided the current API/SDK supports this feature</strong>. Your application could react to these changes by refreshing the UI, redirecting to a specific route, etc.</p>
+            <p>For your convenience, the <code>startMonitoring()</code> method has already been executed once.</p>
+          </td>
+          <td><show-result method="monitorState"></show-result></td>
+        </tr>
+
+        <tr ng-class="getClassForResult('getCurrentUser')">
+          <td><button call-method="getCurrentUser"></button></td>
+          <td>
+            <ul providers-remarks="getCurrentUser"></ul>
+            <p>Most APIs/SDKs have a method to check if the current user is already authenticated. Execute this code in the <code>run()</code> phase of your application to find out if the user is still logged in from a previous session:<pre>.run(['authService', function(authService) {
+  authService.getCurrentUser();
+}])</pre></p>
+            <p>If the user is still authenticated (and authorized), your app's UI should reflect it (e.g. by hiding the "Login" button).</p>
+            <p>For your convenience, this method has already been executed once.</p>
+            </ul>
+          </td>
+          <td><show-result method="getCurrentUser"></show-result></td>
+        </tr>
+
+        <tr ng-class="getClassForResult('loginOAuth')" include="AuthGoogle,AuthFacebook">
+          <td><button call-method="loginOAuth"></button></td>
+          <td>
+            <ul providers-remarks="loginOAuth"></ul>
+            <p>The authorization sequence begins by redirecting the browser (full page or popup) to a URL at the auth provider, which then handles user authentication and user consent.</p>
+            <p>The result (if successful) is an access token that should be included with every subsequent API request in the following header:<br/><code>authorization: Bearer &lt;YOUR_ACCESS_TOKEN&gt;</code>
+            <div class="alert alert-info"><p>JS client libraries handle this for you automatically.</p></div>
+            <p>NB. If nothing happens when you click the button, it is most likely because you're already authenticated with <strong>{{providerInfo.name}}</strong>.</p>
+          </td>
+          <td><show-result method="loginOAuth"></show-result></td>
+        </tr>
+
+        <tr ng-class="getClassForResult('loginEmailPwd')" include="AuthFirebase">
+          <td><button call-method="loginEmailPwd"></button></td>
+          <td>
+            <ul providers-remarks="loginEmailPwd"></ul>
+          </td>
+          <td><show-result method="loginEmailPwd"></show-result></td>
+        </tr>
+
+        <tr ng-class="getClassForResult('loginWrongEmail')" include="AuthFirebase">
+          <td><button call-method="loginWrongEmail"></button></td>
+          <td>
+            <ul providers-remarks="loginWrongEmail"></ul>
+          </td>
+          <td><show-result method="loginWrongEmail"></show-result></td>
+        </tr>
+
+        <tr ng-class="getClassForResult('loginWrongPwd')" include="AuthFirebase">
+          <td><button call-method="loginWrongPwd"></button></td>
+          <td>
+            <ul providers-remarks="loginWrongPwd"></ul>
+          </td>
+          <td><show-result method="loginWrongPwd"></show-result></td>
+        </tr>
+
+        <tr ng-class="getClassForResult('loginEmailPwdAdmin')" include="AuthFirebase">
+          <td><button call-method="loginEmailPwdAdmin"></button></td>
+          <td>
+            <ul providers-remarks="loginEmailPwdAdmin"></ul>
+            <p class="alert alert-danger">TODO: does not work</p>
+          </td>
+          <td><show-result method="loginEmailPwdAdmin"></show-result></td>
+        </tr>
+
+        <tr ng-class="getClassForResult('logout')">
+          <td><button call-method="logout"></button></td>
+          <td>
+            <ul providers-remarks="logout"></ul>
+            <p>This method logs the current user out.</p>
+          </td>
+          <td><show-result method="logout"></show-result></td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+</div>
+
+<!-- Authorization -->
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Authorization Examples</h3>
+  </div>
+  <div class="panel-body">
+
+    <table class="table table-condensed">
+
+      <thead>
+        <tr>
+          <th class="col-md-2">Method</th>
+          <th class="col-md-4">What the code does</th>
+          <th class="col-md-6">Results</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr ng-class="getClassForResult('GooglePlusProfile')" include="AuthGoogle">
+          <td><button call-method="GooglePlusProfile"></button></td>
+          <td>
+            <ul providers-remarks="GooglePlusProfile" no-prefix></ul>
+            <p>NB. The <strong>Google+ API</strong> must be enabled in your <a href="https://console.developers.google.com">Google Developers Console</a> for this example to work (go to the project you're using for these examples, then to <strong>APIs &amp; auth &gt; APIs</strong>, and enable the Google+ API).</p>
+          </td>
+          <td><show-result method="GooglePlusProfile"></show-result></td>
+        </tr>
+
+        <tr ng-class="getClassForResult('GmailMessageList')" include="AuthGoogle">
+          <td><button call-method="GmailMessageList"></button></td>
+          <td>
+            <ul providers-remarks="GmailMessageList" no-prefix></ul>
+            <p>NB. The <strong>Gmail API</strong> must be enabled in your <a href="https://console.developers.google.com">Google Developers Console</a> for this example to work (go to the project you're using for these examples, then to <strong>APIs &amp; auth &gt; APIs</strong>, and enable the Gmail API).</p>
+          </td>
+          <td><show-result method="GmailMessageList"></show-result></td>
+        </tr>
+
+        <tr ng-class="getClassForResult('FBUserProfile')" include="AuthFacebook">
+          <td><button call-method="FBUserProfile"></button></td>
+          <td>
+            <ul providers-remarks="FBUserProfile" no-prefix></ul>
+          </td>
+          <td><show-result method="FBUserProfile"></show-result></td>
+        </tr>
+
+        <tr ng-class="getClassForResult('FBPostStatus')" include="AuthFacebook">
+          <td><button call-method="FBPostStatus"></button></td>
+          <td>
+            <ul providers-remarks="FBPostStatus" no-prefix></ul>
+          </td>
+          <td><show-result method="FBPostStatus"></show-result></td>
+        </tr>
+
+        <tr ng-class="getClassForResult('FBRequestPerm')" include="AuthFacebook">
+          <td><button call-method="FBRequestPerm"></button></td>
+          <td>
+            <ul providers-remarks="FBRequestPerm" no-prefix></ul>
+          </td>
+          <td><show-result method="FBRequestPerm"></show-result></td>
+        </tr>
+
+        <tr include="AuthFirebase">
+          <td colspan="3"><div class="alert alert-warning">
+            <p><strong>Important.</strong> Firebase is a realtime database and querying data works differently from traditional databases: Firebase data is retrieved by attaching an asynchronous listener to a Firebase reference. The listener will be triggered once for the initial state of the data and <strong>again anytime the data changes</strong>.</p>
+            <p>As a consequence, the methods below don't just "query" data, they start "watching" it. To see what I mean, click <code>FirebaseQuery2()</code> when you're authenticated (you should see the resulting data) and then click <code>logout()</code> above. You'll see that logging out automatically updates the result of <code>FirebaseQuery2()</code>.</p>
+            <p>It's magical! :-)</p>
+          </div></td>
+        </tr>
+
+        <tr ng-class="getClassForResult('FirebaseQuery1')" include="AuthFirebase">
+          <td><button call-method="FirebaseQuery1"></button></td>
+          <td>
+            <ul providers-remarks="FirebaseQuery1" no-prefix></ul>
+          </td>
+          <td><show-result method="FirebaseQuery1"></show-result></td>
+        </tr>
+
+        <tr ng-class="getClassForResult('FirebaseQuery2')" include="AuthFirebase">
+          <td><button call-method="FirebaseQuery2"></button></td>
+          <td>
+            <ul providers-remarks="FirebaseQuery2" no-prefix></ul>
+          </td>
+          <td><show-result method="FirebaseQuery2"></show-result></td>
+        </tr>
+
+        <tr ng-class="getClassForResult('FirebaseQuery3')" include="AuthFirebase">
+          <td><button call-method="FirebaseQuery3"></button></td>
+          <td>
+            <ul providers-remarks="FirebaseQuery3" no-prefix></ul>
+          </td>
+          <td><show-result method="FirebaseQuery3"></show-result></td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+</div>

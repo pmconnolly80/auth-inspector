@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" ng-app="app">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>AngularJS Auth Inspector</title>
+
+  <link href="../vendor/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link href="assets/style.css" rel="stylesheet" media="screen">
+
+  <!-- jQuery is required by Bootstrap JS, which is required to power the dropdown... -->
+  <script src="../vendor/underscore-min.js"></script>
+  <script src="../vendor/jquery.min.js"></script>
+  <script src="../vendor/dropdown.js"></script>
+
+  <script src="../vendor/angular.js"></script>
+  <script src="../vendor/angular-sanitize.js"></script>
+  <script src="../vendor/angular-route.js"></script>
+
+  <script src="common/utils.js"></script>
+  <script src="common/config-manager.js"></script>
+
+  <script src="app/controllers/index.js"></script>
+  <script src="app/controllers/AuthProviderCtrl.js"></script>
+
+  <script src="app/directives/index.js"></script>
+  <script src="app/directives/providerSwitcher.js"></script>
+  <script src="app/directives/providersRemarks.js"></script>
+  <script src="app/directives/callMethod.js"></script>
+  <script src="app/directives/showResult.js"></script>
+  <script src="app/directives/IncludeExclude.js"></script>
+
+  <script src="app/auth_providers/index.js"></script>
+  <script src="app/auth_providers/AuthProvidersManager.js"></script>
+  <script src="app/auth_providers/AuthResultsManager.js"></script>
+  <script src="app/auth_providers/AuthGoogle.js"></script>
+  <script src="app/auth_providers/AuthFacebook.js"></script>
+  <script src="app/auth_providers/AuthFirebase.js"></script>
+
+  <script src="app/auth_inspector.js"></script>
+
+  <script src="app.js"></script>
+
+</head>
+<body ng-controller="AppCtrl">
+
+  <div ng-include="'app/partials/navbar.tpl.html'"></div>
+
+  <div class="container">
+
+    <div class="alert alert-danger" ng-show="error">
+      <button type="button" class="close" ng-click="hideError()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <strong>Error!</strong> {{error}}
+    </div>
+
+    <div ng-view></div>
+
+    <div class="footer">
+      <p><a href="http://ng-workshop.com/">Quality AngularJS Training</a> | &copy; <a href="http://felisite.com/">Félisite</a> 2014</p>
+    </div>
+
+  </div>
+
+</body>
+</html>
