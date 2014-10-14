@@ -1,5 +1,7 @@
 # AngularJS Auth Inspector
 
+![AngularJS Auth Inspector](/src/assets/auth-inspector-logo.png?raw=true)
+
 ## Quick Start
 
 Visit http://ngworkshop.github.io/auth-inspector/src/ and play online with the different authentication providers like Google, Facebook, etc. Auth Inspector includes lots of comments that should help you get started with the authentication provider of your choice.
