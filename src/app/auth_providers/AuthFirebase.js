@@ -40,8 +40,9 @@
             'To have fine-grained control over which users can access which data in your Firebase using <a href="https://www.firebase.com/docs/security/">security rules</a>.'],
           requirements: ['Create <strong>an account</strong> at <a href="https://www.firebase.com/">https://www.firebase.com/</a>.',
             'Create <strong> an app</strong> in your Firebase dashboard.',
-            'In the <strong>Login & Auth</strong> section of the Firebase app you\'ve just created, enable the authentication provider that you wish to use (for example: "Email & Password", "Google"...). Note that some providers like Google or Facebook additionally require that you set up an app directly with them.'],
-          inYourCode: ['Include the <a href="https://www.firebase.com/docs/web/guide/setup.html">Firebase JavaScript client library</a>.']
+            'In the <strong>Login & Auth</strong> section of the Firebase app you\'ve just created, enable the authentication provider that you wish to use (for example: "Email & Password", "Google"...). Note that some providers like Google or Facebook additionally require that you set up an app directly with them (you will then need to copy the IDs they give you in your Firebase dashboard).'],
+          inYourCode: ['Include the <a href="https://www.firebase.com/docs/web/guide/setup.html">Firebase JavaScript client library</a> that will help you authenticate your users with Firebase (or the providers you\'ve configured in your Firebase dashboard) and make requests to the Firebase API.',
+            'If you\'re installing Auth Inspector locally, copy your Firebase URL in <code>src/app/config.js</code> (<code>FBURL</code> constant).']
         },
         remarks: {
           init: ['Creates a reference to your Firebase:<br/><code>var ref = new Firebase("https://&lt;your-firebase&gt;.firebaseio.com");</code>'],

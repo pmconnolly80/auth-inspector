@@ -61,6 +61,7 @@
        *   A promise that will be resolved if & when the provider's dependencies are satisfied.
        */
       function activate(name) {
+        console.log('activating...', name);
         var provider,       // Instantiated service representing the provider being activated
             providerMeta,   // Metadata about the provider being activated
             providerInfo,   // Info about the provider being activated (dependencies...)
@@ -76,17 +77,6 @@
         provider     = $injector.get(name);
         providerMeta = providers[name];
         providerInfo = provider.getInfo();
-
-        // Some JS libraries (like Google's) invoke a callback once they have finished initializing.
-        // Create a promise that will be resolved when this callback is called. Hackish...
-        if (providerInfo.SDKLoadedCallback) {
-          var depsInitDeferred = $q.defer();
-          dependenciesInitialized = depsInitDeferred.promise;
-          $window[providerInfo.SDKLoadedCallback] = function() {
-            depsInitDeferred.resolve('The dependency of ' + name + ' has finished loading.');
-            delete $window[providerInfo.SDKLoadedCallback];
-          };
-        }
 
         // Do the heavy-lifting only if the provider has never been activated.
         if (!providerMeta.activatedBefore) {
@@ -112,9 +102,18 @@
               constantsDefined = $q.reject('Missing constants: ' + missingConstants.join(', '));
             }
           }
+          // Process "loaded callbacks" (if any).
+          // Some JS libraries (like Google's) invoke a callback once they have finished initializing.
+          // Create a promise that will be resolved when this callback is called. Hackish...
+          if (providerInfo.SDKLoadedCallback) {
+            var depsInitDeferred = $q.defer();
+            dependenciesInitialized = depsInitDeferred.promise;
+            $window[providerInfo.SDKLoadedCallback] = function() {
+              depsInitDeferred.resolve('The dependency of ' + name + ' has finished loading.');
+              delete $window[providerInfo.SDKLoadedCallback];
+            };
+          }
         }
-
-        // var allRequirementsSatisfied = $q.all([dependenciesLoaded, constantsDefined]);
 
         // Create a new promise that will be resolved with the value of the provider instance
         // when all requirements are satisfied (makes it more convenient to use this function
@@ -122,6 +121,7 @@
         var deferred = $q.defer();
         $q.all([dependenciesLoaded, dependenciesInitialized, constantsDefined])
           .then(function() {  // This function receives the resolve values of the aggregated promises
+            console.log('promises resolved');
             activeProvider = provider;
             activeProviderName = name;
             providers[name].activatedBefore = true;
